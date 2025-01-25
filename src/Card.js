@@ -1,25 +1,53 @@
-function Card({ image, title, social, content }) {
-  const cardStyle = {
-    minHeight: "200px",
-  };
-  const imgStyle = {
-    maxHeight: "300px",
-  };
+import PropTypes from "prop-types";
 
+const styles = {
+  card: {
+    minHeight: "200px",
+  },
+  image: {
+    maxHeight: "300px",
+    objectFit: "cover",
+  },
+};
+
+function Card({ image, title, social, content, imageAlt }) {
   return (
-    <div className="card m-3" style={cardStyle}>
+    <article className="card m-3" style={styles.card}>
       <div className="card-image">
         <figure className="image is-4by3">
-          <img src={image} alt="img1" style={imgStyle} />
+          <img src={image} alt={imageAlt || title} style={styles.image} />
         </figure>
       </div>
       <div className="card-content">
-        <p className="title is-4">{title}</p>
-        <p className="subtitle is-6">@{social}</p>
+        <h2 className="title is-4">{title}</h2>
+        {social && (
+          <p className="subtitle is-6">
+            <a
+              href={`https://twitter.com/${social}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @{social}
+            </a>
+          </p>
+        )}
         <div className="content">{content}</div>
       </div>
-    </div>
+    </article>
   );
 }
+
+Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  social: PropTypes.string,
+  content: PropTypes.node.isRequired,
+  imageAlt: PropTypes.string,
+};
+
+Card.defaultProps = {
+  social: "",
+  imageAlt: "",
+};
 
 export default Card;
