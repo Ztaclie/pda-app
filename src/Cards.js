@@ -5,15 +5,27 @@ import Siri from "./images/siri.png";
 
 const styles = {
   container: {
-    maxWidth: "1200px",
-    width: "90%",
-    margin: "2rem auto",
+    maxWidth: "1000px",
+    width: "95%",
+    margin: "1.5rem auto",
+    padding: "0 1rem",
   },
   cardGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "2rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "1.5rem",
     alignItems: "stretch",
+  },
+  sectionTitle: {
+    marginBottom: "2rem",
+    textAlign: "center",
+    color: "#363636",
+  },
+  cardGroup: {
+    backgroundColor: "#f5f5f5",
+    borderRadius: "8px",
+    padding: "2rem 1.5rem",
+    boxShadow: "0 2px 3px rgba(10, 10, 10, 0.1)",
   },
 };
 
@@ -44,10 +56,19 @@ function Cards() {
 
   return (
     <section style={styles.container}>
-      <div style={styles.cardGrid}>
-        {assistants.map((assistant) => (
-          <Card key={assistant.social} {...assistant} />
-        ))}
+      <div style={styles.cardGroup}>
+        <h2 style={styles.sectionTitle} className="is-size-4">
+          Popular AI Assistants
+        </h2>
+        <div style={styles.cardGrid}>
+          {assistants.map((assistant) => (
+            <Card
+              key={assistant.social}
+              {...assistant}
+              className="has-background-white"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
